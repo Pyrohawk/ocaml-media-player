@@ -1,0 +1,14 @@
+# Compiled OCaml files
+*.cmo
+*.cmi
+*.cmx
+*.o
+*.a
+*.cma
+*.cmxa
+
+# Build folders and executables
+x86_64/
+omp
+.DS_Store
+_build

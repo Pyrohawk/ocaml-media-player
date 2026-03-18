@@ -1,0 +1,71 @@
+# Use this file to set default omp options.
+# WARNING: omp does very little error checking.  Entries should
+# follow the pattern given exactly.  In particular, do not insert
+# spaces before the equal sign.
+
+# extensions that omp should handle (must be recognized by vlc)
+Extensions=.ogg .flac .mp3 .wma .m4a .mp4 .flv .mov .avi .webm
+
+# play list is saved after this many plays
+SaveInterval=10
+
+# lists to play
+ListsToPlay=A
+
+# Check entry rating and roll random percentage or less to play
+CheckRating=1
+
+# Play new songs without checking rating or age
+ForceNew=1
+
+# Automatically adjust rating if entry isn't skipped
+UpdateRating=1
+
+# Check entry for MinimumAge before playing
+CheckRepeat=1
+
+# SelectMethod = R - Random, S - Sequential, O - Oldest first
+SelectMethod=R
+
+# default score to assign new entries
+DefaultScore=50
+
+# minimum age before an entry will replay, use the following suffixes:
+#  s = seconds , m = minutes (default), h = hours,
+#  d = days, w = weeks, m = months, y = years.
+MinimumAge=1d
+
+# Use AgeBonus logic.  See User's manual.
+AgeBonus=0
+
+# Entry is considered "new" for this number of plays (See ForceNew)
+NewSkipAge=5
+
+# Automatically lock rating after this number of plays/selections
+# 0 to disable
+AutoLock=0
+
+# Font to use for Playlist editor.  Best set within configuration
+Font=Nimbus Roman No9 L
+
+# Font size to use in Playlist editor.
+FontSize=10
+
+# Font weight to use in Playlist editor.  Either "normal" or "bold"
+FontWeight=normal
+
+# Number of spaces to use for file name in Playlist editor.  This is
+# approximate and affects the size of the entire window frame.
+NameWidth=80
+
+# See user manual.
+ForgottenAge=90d
+
+# See user manual.
+ForgottenMin=50
+
+# Show the video portion of files.  If 0, then only the sound is
+# played.  This defaults to 0 because vlc automatically sets the
+# input focus to the video window which can be annoying and certain
+# keys entered in the vlc window will confuse omp.
+ShowVideo=0

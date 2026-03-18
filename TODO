@@ -1,0 +1,65 @@
+Prioritized TODO (Odd numbered entries are user's requests):
+Note:  OMP2 is currently in development.  The items marked [OMP2] will
+        be in it and probably will not be backported to OMP.
+  16. Fix bug where program gets confused if a video is closed in the
+      video window.  While I'm at it, I should make displaying the
+      video an option, perhaps even on an entry by entry basis.
+  20. Documentation.
+      [Almost done]
+  30. Improve the playlist classification system.  Give them meaningful
+      names.  Add browser for playlists.
+      [OMP2]
+  31. Sort by columns in the playlist.
+      [OMP2]
+  33. Allow deleting files from within the program/playlist editor.
+      [I've been hesitant to add this feature.  I've seen so many
+       users delete stuff by mistake and then blame it on the program.        Perhaps it could do like some programs and move it to a trash
+       bin somewhere?]
+  35. If ratings are set manually, automatically lock the rating.
+      [I've done this in the playlist editor, but I need to clean up
+       some of the code in the player a bit to do this efficiently.]
+  37. Add ability to load the same playlist entries for a different
+      user which would keep separate ratings for multiple users using
+      the same computer.
+      [This will probably involve separating the playlist from the
+      ratings and other user-specific data, so is a non-trivial task.]
+      [OMP2]
+  40. Improve search in playlist editor - wildcards, visual feedback,
+      etc.
+      [OMP2, may backport]
+  41. "Boxed" state of the "%" button isn't saved on exit.
+      [Actually, this is a feature, not a bug. :)  The program does
+      not save the state of the settings unless you go into the
+      preference editor and save them there.  This allows temporarily
+      changing the settings for the current session only.  If this is
+      too confusing, or enough users think it should always save the
+      current configuration, it's only one line of code I would need
+      to add.  I guess I could make it a preference option.]
+      [User agreed that it was fine and even a useful feature as is.]
+  90. Port to other OS's.  I've had no succes at all getting OCaml/Tk to
+      work in Windows.  It is supposed to and probably does for most
+      people.  Now that I've developed a customized Tk library that
+      replaces lablTk, perhaps I could get this working.  But I have
+      no other reason to boot into Windows and rarely feel like
+      bothering to try.  No Mac to try it on.
+
+* 100+ are things that I haven't figured out a practical way to do yet.
+  103. Sometimes the "Previous" button skips to the next song instead of
+      backing up to a previous one.
+      [I've been unable to duplicate this on my system.  Perhaps
+      there's nothing in the history to backup to?  History is not
+      kept if OMP is exited.]
+  105. If you Stop and then Exit the program, it messes up the xterm by
+      turning the echo off.
+      [I think this was fixed when we switched to using vlc.]
+  151. Fix Set Rating.  Should default to current, allow cancel.
+      [We can't consistently default to current since multiple
+      entries could be selected.  Perhaps we should if only one entry
+      is selected.  Escape now works to cancel.]
+
+* 200+ are things that I haven't bothered to test.
+  201. If in the "O"ldest mode, what would happen if it goes to the
+        end? 	I have almost 4,000 entries in my playlist and the power
+        in Zambia	goes off several times a week so I'm not worried
+        about it. :)  But	the program is coded so that it is supposed
+        to wrap around and	start over.

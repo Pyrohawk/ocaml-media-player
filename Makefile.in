@@ -1,0 +1,51 @@
+DESTDIR =
+PACKAGE_TARNAME = omp
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+datarootdir = @datarootdir@
+DOCDIR = @docdir@
+BINDIR = $(DESTDIR)@bindir@
+SHAREDIR = $(datarootdir)/omp
+OCAMLOPT = @OCAMLOPT@
+MACHINE = @MACHINE@
+INSTALL = @INSTALL@
+
+LIBS = unix.cmxa threads.cmxa graphics.cmxa labltk.cmxa
+
+SOURCES = qlib vlc g playlist confedit
+RESULT = omp
+CMX = $(patsubst %, %.cmx, $(SOURCES))
+
+OPTS = -g -thread -I +labltk -I $(MACHINE)
+
+all: omp
+
+omp: $(CMX) omp.ml
+	cp omp.ml $(MACHINE)
+	cd $(MACHINE); $(OCAMLOPT) $(OPTS) -o omp $(LIBS) $(CMX) omp.ml
+	strip $(MACHINE)/omp
+
+qlib.cmx: qlib.ml
+	$(OCAMLOPT) $(OPTS) -c -o $(MACHINE)/$@ $^
+
+vlc.cmx: qlib.cmx vlc.ml
+	$(OCAMLOPT) $(OPTS) -c -o $(MACHINE)/$@ $^
+
+g.cmx: qlib.cmx vlc.cmx g.ml
+	$(OCAMLOPT) $(OPTS) -c -o $(MACHINE)/$@ $^
+
+playlist.cmx: qlib.cmx vlc.cmx g.cmx playlist.ml
+	$(OCAMLOPT) $(OPTS) -c -o $(MACHINE)/$@ $^
+
+confedit.cmx: qlib.cmx vlc.cmx g.cmx playlist.cmx confedit.ml
+	$(OCAMLOPT) $(OPTS) -c -o $(MACHINE)/$@ $^
+
+install:
+	sh mkompinit.sh $(SHAREDIR)
+	$(INSTALL) -m 755 -d $(BINDIR) $(SHAREDIR) $(DOCDIR)
+	$(INSTALL) -m 755 $(MACHINE)/omp ompinit $(BINDIR)
+	$(INSTALL) -m 644 images/*.gif omprc $(SHAREDIR)
+	$(INSTALL) -m 644 doc/ompdoc.pdf $(DOCDIR)
+
+clean:
+	rm $(MACHINE)/*.{cmi,cmx,o} $(MACHINE)/omp

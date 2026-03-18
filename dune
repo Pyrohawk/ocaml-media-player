@@ -1,0 +1,6 @@
+(executable
+ (name omp)
+ (public_name omp)
+ (modules qlib vlc g playlist confedit omp)
+ (libraries unix threads graphics) ; We replace 'otk' with its components if possible
+ (flags :standard -thread -g))

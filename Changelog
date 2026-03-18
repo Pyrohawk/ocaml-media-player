@@ -1,0 +1,698 @@
+Ver. 1.06.02 -
+    * Changed to use autoconf to configure/build/install so we
+      look a bit more normal and binaries can be installed
+      without OCaml.
+
+Ver. 1.06.01 - 2014-06-17
+    * Changed to use progressbar for duplicate search progress.
+    * Fixed duplicate search to handle case where no duplicates
+      are found.
+    * Added Age Bonus section to user manual.
+    * Removed .mod from list of extensions
+
+Ver. 1.06.00 - 2014-06-16
+    * First general public release.
+    * Rewrite comments on omprc save.
+    * Implement DefaultScore
+    * Update user manual with "forgotten" logic explanation
+    * Write configure, build, install scripts to replace qmk
+        so users don't have to install another make program.
+
+Ver. 1.05.01 - 2014-06-14
+    * Fixed missing file bug on duplicate processing
+Ver. 1.05.00 - 2014-06-14
+    * Rewritten duplicate search/processing.
+Ver. 1.04.00 - 2014-06-13
+    * Copied functions from my qlib and qulib libraries to reduce
+        dependencies.
+Ver. 1.03.00 - 2014-05-16
+    * Added size grips to configuration windows
+    * Updated preferences
+    * Allow <Escape> to exit playlist editor dialogs
+    * Implement "Add File" button
+Ver. 1.02.01 - 2014-05-12
+    * Changed to use ttk widgets.
+    * Tweaks to "forgotten" logic
+Ver. 1.01.02 - 2014-04-27
+    * Changed forgottenDelay to make checks roughly twice as frequently
+
+Ver. 1.01.01 - 2014-04-24
+    * Tweak to "forgotten" logic to skip checking songs that are not in
+        the lists currently being played.
+    * Experimental: Changed "forgotten" lower bound to 50.
+    * Add to TODO: "forgotten" parameters should be options.
+
+Ver. 1.00.15 - 2013-11-02
+    * Added .avi extension (again?).
+
+Ver. 0.21.00 - 2012-07-02
+    * Added .mp4, .avi, .flv, .mov to list of extensions.  Added
+        toggle for video or no video on their playback.  Defaults
+        to NO video.
+    * Changed "forgotten" logic to also include songs never played.
+    * Removed extlib usage.  It caused occasional seg faults.
+
+Ver. 0.20.01 - 2011-03-15
+    * Slight tweak to 0.20.00.  Don't check for forgotten songs quite
+    * so often.  After about 3 days, all the forgotten ones had been
+    * "found."
+
+Ver. 0.20.00 - 2011-02-22
+    * WARNING:  This version is not thoroughly tested.  Please
+        backup your playlist file (~/.omp/scorelist) before running this
+        version.
+    * Added yet another attempt to make sure favorite songs that could
+        be skipped by the randomizer are looked at more often.  The
+        algorithm is rather complicated, just let me know if you don't
+        like it and why.
+    * Fixed long delay when queueing and other actions in the playlist
+        editor.  Entire list box was being refreshed.  Wasn't noticeable
+        until list got very large.
+    * If the playlist editor is active, the list should be updated
+        when changes are made in the main omp window.
+    * Display "die roll" in terminal window on failed rating checks.
+
+Ver. 0.19.02 - 2010-12-17
+    * Removed "Not in List" message.  It was causing the terminal view
+        to hang sometimes when lots of entries were listed.
+
+Ver. 0.19.01 - 2010-11-27
+    * The 0.19 change works great!  Decided to use ceiling instead of
+        floor, so the "rounded down" below should be "rounded up" and
+        the last sentence is incorrect.
+
+Ver. 0.19.00 - 2010-11-16
+    * The problem with sequential ordering is that there may be many
+        unplayed songs which will play straight through.  I rarely want
+        to listen to music that way.  The problem with random selection
+        is that even a song with a 100 rating might not be selected for
+        an indefinite period of time.  I recently saw a 96 rated song
+        that hadn't played in 7 months!  This wasn't really a problem
+        until we started having 1000s of songs.  Credit Brian Hawkins
+        with a very simple and elegant solution to this problem.  The
+        program will now calculate a RangeNumber that is TotalEntries
+        / 1000 rounded down.  Currently, in random mode, the randomizer
+        simply selects a random number between 1 and TotalEntries as the
+        entry to look at for age and rating evaluation.  Now, it will
+        look in either direction from that random number for RangeNumber
+        of entries and select the "oldest" entry.  If TotalEntries <
+        1000, then this search won't be done since RangeNumber = 0, so
+        the program works just as before.
+
+Ver. 0.18.03 - 2010-08-13
+    * Added Alt-f "Normalize Name" to playlist editor.  [NOT WORKING]
+
+Ver. 0.18.02 - 2010-07-22
+    * Added ^g option to playlist editor to 
+
+Ver. 0.18.01 - 2010-07-14
+    * Changed default directory for ^d option to first selected entry.
+
+Ver. 0.18.00 - 2010-07-13
+    * Added ^d option to playlist editor to move files to a new
+      directory.
+    *    See the documentation for caveats.
+    * Changed installation method to use the install.sh script.
+
+Ver. 0.17.07 - 2009-10-03
+    * Use omix to get/set volume.  amixer is no longer required.
+    *    However, it still only works with ALSA.  Master and
+    *    and PCM controls can be changed individually, but not
+    *    left and right channels.  I could easily make the omix
+    *    library handle the channels, i just haven't decided on
+    *    the best way to handle it in the user interface.
+    * Changed volume display to show Master/PCM controls
+    * Allow changing specific volume control:
+    *    - and + adjusts controls evenly %age wise as before
+    *    ctrl- and ctrl+ adjust the Master control
+    *    alt- and alt+ adjust the PCM control
+
+Ver. 0.17.06 - 2009-09-30
+    * Changed volume control to use percents.
+    * Added support for x86_64 compilations
+
+Ver. 0.17.05 - 2009-05-03
+    * Added .mp4 extension for mplayer.
+
+Ver. 0.17.04 - 2009-04-09
+    * Added ability to play .wma and .m4a files through mplayer.
+
+Ver. 0.17.03 - 2009-02-16
+    * Added queue length display
+    * Fixed bug where rating was updated on unplayable entry
+    * Allow <Escape> to cancel sublist move or copy and rating set.
+    * Remove default rating in playlist editor ^r command
+
+Ver. 0.17.02 - 2008-12-04
+    * Changed NewSkipAge (Ver. 0.13.00) to apply only to entries rated
+      >= 50%.
+
+Ver. 0.17.01 - 2008-11-18
+    * Changed Skip button to lower the rating even if the entry is
+      locked.
+    * Changed "Trash Missing" to not update the display after every
+      entry during the search which was slowing it down considerably.
+    * Added "b" in Playlist Editor to search backwards.
+    * Changed hotkeys in Queue Editor to unmodified letters.  Added
+      "t" to move to top, "b" to move to bottom, and changed the
+      move down key to "d".  Other tweaks to Queue Editor.
+    * Documented Queue Editor.
+
+Ver. 0.17.00 - 2008-11-18
+    * Fixed bug introduced in 0.15.06.  When the text in the entry
+      box was automatically selected, it removed the selection from
+      the playlist listbox causing a "No items selected!" message.
+    * Use volume percentages for determining whether to bump the PCM
+      or the Master volume.
+    * Added "Trash missing" button to the Playlist Editor.  This will
+      go through the entire playlist and move all entries pointing to
+      non-existent files to Trash (playlist "x").  Due to a design
+      decision that isn't likely to change, entries cannot be removed
+      while the program is running.  However, whenever omp starts, it
+      ignores any entries in the playlist that are only in the "x"
+      playlist.  When it next saves the playlist, those entries will
+      be gone.  Be aware that if you have entries in your playlist
+      that point to files on unmounted devices, these will also be
+      trashed.  If you want to preserve such files, copy them to a
+      special list called "p" (for preserve) and they will be skipped
+      in the missing check.
+    * Added ability to put a + or - in front of the "Set Rating"
+      number in the Playlist Editor.  This will add or subtract
+      the given amount to the ratings for the selected entries.
+      This makes it easy to adjust an entire album or other grouping
+      up or down easily while maintaining the individual differences
+      within the group.  You can also end the number with a % sign
+      and the adjustment will be a percentage.  If you use only a
+      percent sign, then the given percentage will be added as if
+      a '+' were in front.  Some examples with the rating before
+      adjustment being 0, 50, 100:
+      	Input	Ratings after
+    	10	10, 10, 10	(as before)
+    	+10	10, 60, 100
+    	-10	0, 40, 90
+    	+10%	0, 55, 100	(same as 10%)
+    	-10%	0, 45, 90
+      Caveat 1: Integer arithmetic with truncation is used.  Thus +1%
+      will never do anything, and -1% will only adjust 100 to 99 and
+      not change any other rating.
+      Caveat 2: The number part is still limited to 0-100.
+      Caveat 3: omp was never intended to be idiot proof.  There is
+      no undo.
+
+Ver. 0.16.01 - 2008-11-15
+    * Some minor tweaks with probably no noticeable difference.
+
+Ver. 0.16.00 - 2008-11-08
+    * Wrote installation script.  Moved images to a shared directory.
+    * Wrote about half of the documentation.  Be sure and read the
+      section on installation because just copying the omp
+      executable will not work.
+
+Ver. 0.15.06 - 2008-11-07
+    * Fixed exit key again.  It didn't work if NumLock was on.  Duh!
+    * Changed "omp User Entry" dialog box to select current text so
+      it can be more easily changed.  Use a right arrow as the first
+      key if you want to edit the current text.
+    * Fixed Queue frame to refresh automatically when the queue changes.
+
+Ver. 0.15.05 - 2008-11-01
+    * Changed the AgeBonus algorithm.  After trying geometric and
+      logarithmic functions, I realized what I really wanted was an
+      arctangent curve--one that rises rapidly in the middle and
+      flattens out at both ends.  I also thought of a way users can
+      easily (well, at least those that know how to program) define
+      their own function.  omp will attempt to execute a program
+      called agebonus in the ~/.omp directory.  This program should
+      return a list of 100 real numbers ranging from 100 down to 0
+      on 100 separate lines.  In fact, the program could be a shell
+      script with echo statements and the numbers hard-coded.
+	  
+      Here's what the numbers mean.  omp takes the MinimumAge and
+      AgeBonus definitions and converts them to seconds.  It then
+      divides the difference of those numbers by 100.  Call the result
+      AgePenalty.  For a given rating, it takes the number returned
+      by the AgeBonus algorithm and multiplies that times AgePenalty.
+      The result is added to the MinimumAge to give a ModifiedMinAge
+      which is what omp uses in place of the MinimumAge.  Although my
+      algorithm is hard-coded into omp, I have included a sample
+      OCaml program, agebonus.ml, that would accomplish the same thing
+      if it were compiled and the executable placed in ~/.omp.  I
+      have also included agebonus.tcl which does the same thing as
+      a TCL script.  You can use whatever language you like as long
+      as the output matches the format.  If you have OCaml, you can
+      enter "ocaml agebonus.ml" to see the output from that program.
+      "tclsh agebonus.tcl" will run the TCL script program.  Actually
+      you should be able to set it to an executable and run it
+      directly with "./agebonus.tcl".
+
+      If you want to see debug information for ageBonus calculations,
+      you can run omp with the "debug" argument.  Note that omp only
+      looks at the first argument.
+
+Ver. 0.15.03 - 2008-10-31
+    * Changed the order of the buttons on the player.
+    * Changed the "Previous" button to always go to the previous entry.
+      Since pressing the "Play" button will restart the current entry,
+      having the "Previous" button do the same thing was redundant.
+    * Fixed bug where listbox wasn't displaying correctly after adding
+      entries to the queue.
+
+Ver. 0.15.02 - 2008-10-29
+    * Fixed bug where if several sequential entries are queued and
+      one of them is linked to the next, the "next" entry would play
+      twice in a row--once for being linked, and once for being queued.      Now the link checks to see that the linked entry is not in the
+      queue before linking it.
+    * Changed the Exit tooltip to ^w instead of ^Esc.
+
+Ver. 0.15.01 - 2008-10-24
+    * Added "<" and ">" in the playlist editor to move back and forward
+      through the play history.
+    * Changed ^l and ^n in playlist editor to act as a toggles, IOW if
+      an entry is already linked or locked, they will undo it.
+
+Ver. 0.15.00 - 2008-10-22
+    * Added ^w as an exit key to the main program in addition to ^Escape
+      for those whose window managers capture ^Escape.
+    * Added NameWidth option.  This allows the user to define the width
+      of the name field in the playlist editor.  The default is 70.
+    * Changed scrolling name to display the entry as it appears in the
+      playlist editor.  Thus one can just about everything omp knows
+      about the entry as it plays.
+    * Fixed bug where if an entry is locked and then unlocked, it didn't
+      recalculate the default increase/decrease for the rating.
+    * Fixed bug where if the Playlist editor was closed through the
+      window manager, then the Queue editor remained and was hard to
+      get rid of.
+    * Fixed bug with volume control.  I thought the 0 - 31 limits I saw
+      from amixer's output were determined by amixer since it was the
+      same on both my computers which have different sound cards.  It
+      seems that the limits can vary for other sound cards.  The program
+      should correctly handle different limits now.  However, it still
+      only uses the PCM and Master channels.  It was designed to move
+      the two up alternately using the lowest one to increase.  This
+      means if they have different upper limits, one of them will max
+      out before the other.  If this is a problem, it could fairly
+      easily use percentage comparisons like
+        (volPCM / maxPCM) < (volMaster / maxMaster)
+      and increase the lower of those.
+    * Added Playlist Configuration Editor.  This is called off the old
+      Configuration Editor.  Notice the use of Alt- hotkeys.  If I get
+      positive feedback on this, I can add it to other windows.  Another
+      thought i had was to simply use letters to control the spinboxes.
+      E.g., an "S" would increment the font size and a "s" would
+      decrement it.  The main reason i didn't is that i wanted the
+      sample entry box to be editable so users could type their own
+      strings for viewing and i don't think i could keep letters
+      entered there from firing the events.  I also thought of using
+      Alt-S to decrement the spinbox and Ctrl-S to increment it.  One
+      advantage of these two methods is that i could immediately
+      display the change in the sample text.  I haven't figured out
+      how to capture changes made directly on the widgets.  Anyway,
+      for now, you use Alt-S and then the arrow keys.  Alt-F will
+      take you to the font selection listbox.  Alt-V will apply the
+      changes to the sample text.  I may change all these Alts to
+      Ctrls as Ctrl is a lot easier to use on my keyboards.
+
+Ver. 0.14.00 - 2008-10-21
+    * Added ^l to Playlist editor to lock selected entries.
+    * Added new scheduling option called AgeBonus.
+      Here's the problem: I found that my less favorite entries were
+      still playing too frequently and my more favorite ones not as
+      frequently as I would like.  On the average, it is true my
+      favorites will play more frequently over time, but they still
+      will not play more frequent than the minimum age.  Yet my
+      not-so-favorites could also play just as soon as the minimum
+      age in theory.  If an entry fails its rating roll, it must wait
+      minimum age again.  It looks like what I want is for the rating
+      to not only affect the %age roll, but also the minimum age.  For
+      example, I don't mind if my favorite entries play every day, but
+      my less favorites I may not want to play more frequently than
+      once a month.  However, I don't really want this to be simply
+      linear.  For example, I don't really want the MinimumAge for
+      a 99% entry to be twice as long as a 100% entry and certainly
+      don't want a 90% entry's Min.Age to be 10 times as a long.  So,
+      we really need a geometric progression where there is very
+      little difference in the min. age near 100 but increases rapidly
+      toward 0.
+
+      AgeBonus is an attempt to solve this problem.  AgeBonus uses 2
+      numbers: the minimum age for a 100% rated entry (call it Min100),
+      and the minimum age for a 1% rated entry (Min1).  My first guess
+      at a function was close enough for what I wanted.  Unfortunately,
+      I can't think of an easy way for users to define their own
+      functions without adding a lot of code.  Anyway, the formula I
+      came up with is this:
+    	let penalty = (Min100 - Min1) / 100
+    	let minimumAge = (100 ** ((100 - entry.rating) / 99)) * penalty
+      ('**' is the exponentiation operator in OCaml).
+      As you can see, minimumAge will be Min100 for a 100% rating and
+      Min1 for a 1% rating.  Just a few numbers to show the progression
+      where nx means n times the penalty:
+    	90% -> 1.59x, 75% -> 3.2x, 50% -> 10.24x, 25% -> 32.75x.
+
+    To use AgeBonus, set the AgeBonus option (either in omprc or the
+    configuration editor) to some *time period* (like MinimumAge)
+    greater	than 0 to indicate the minimum age for a 1% rated entry
+    (OK, so it is	a bit of a misnomer).  The old MinimumAge value will
+    be used as the	minimum age for 100% rated songs.  Obviously,
+    AgeBonus must be	greater than MinimumAge or else omp will simply
+    use the old selection system.  FWIW, I use "4h" for MinimumAge
+    and "21d" for AgeBonus.  The effect was immediately noticeable and
+    seems to be very close to what	I wanted.
+
+Ver. 0.13.00 - 2008-10-17
+    * Added configuration options NewSkipAge and AutoLock.  Both can be
+      left at 0 to disable them.
+      If NewSkipAge > 0 then omp will skip the Age check for any entries
+        that haven't played more than NewSkipAge times.  This allows new
+        entries to play more frequently.
+      If AutoLock > 0 then omp will automatically lock the rating for an
+        entry after it has played AutoLock number of times.
+
+Ver. 0.12.03 - 2008-10-16
+    * Added ability for user to define fonts for the playlist editor.
+      The default looked ugly on some systems.  You can add a font= to
+      the .omp/omprc file.  Try the following: courier,
+      courier 10 pitch, lucidatypewriter, freemono,
+      bitstream vera sans mono, terminus, dejavu sans mono, or any
+      other fixed space font you may have.  The default is font=fixed.
+      You can try different sizes with fontsize=<num>.  The default is
+      fontsize=9.  It also defaults to a bold font, if you want a
+      normal font, use fontweight=normal.  The default is
+      fontweight=bold.
+
+Ver. 0.12.02 - 2008-10-15
+    * Prettied up the playlist editor display a little.
+    * Added ^p option to "P"ush an entry to the top of the queue so it
+      will play next.
+
+Ver. 0.12.01 - 2008-10-15
+    * Don't allow user to kill Queue editor.  This confuses the Playlist
+      editor.
+    * Make both the above editors a little wider.
+    * Fixed bug where if program was in pause mode after the Pause After
+      was set, then pressing Play caused weird things to happen.
+
+Ver. 0.12.00 - 2008-10-15
+    * Added Queue window to edit the Queue.  Rightclick, press the Menu
+      key, or the F2 key in the Queue window for options.
+      Caveat: If there are duplicate entries in the Queue, then Move Up
+        and Move Down will always act on the last matching one
+        regardless of the actual selection while Delete will always
+        act on the first match.  It would require storing some
+        redundant information and several extra lines of code and I
+        felt it would be a very rare nuisance.  Someone can let me
+        know if it is a problem.
+      Caveat #2: Avoid making changes in the Queue window if the current
+        entry is about to end.  I haven't bothered with locking and it
+        could do unexpected things like delete/move the wrong entry.
+        Only the queue list would get messed up, so if someone wants to
+        try and break it and let me know what happens, please do so.
+    * Fixed search highlight in playlist editor.  Finally!  Yay!
+
+Ver. 0.11.00,0.11.01 - 2008-09-22  
+    * Added "Rename File" function in playlist editor.  This will change
+      the file name both on the disk and in the playlist.
+      Caveats:
+        1) You cannot change the directory;
+        2) You cannot change a name to a file name that already exists;
+        3) It does not re-sort the play list until the program is exited
+           and re-entered; and
+        4) You must have permission to rename the file.
+    * Wrote the beginnings of an install script.
+    * Fixed a bug where hotkeys sometimes didn't work if NumLock was on.
+    * Fixed bug where program would segfault if there was no valid entry
+      to play.  Now it just goes into an infinite loop. :)  Well, it
+      did, but I fixed that also.
+    * Fixed bug where program would segfault after playing the last
+      entry in sequential mode.  It now wraps around correctly.
+    * Changed so the playlist editor will center on a previous selection
+      when changes are made in the playlist.  I'm not sure I got them
+      all, though.
+    * Moved lock and link flags from lists field to a new flags field.
+      This *should* be still backwards compatible.  If you have used
+      "Copy to List" to lock or link entries, it will still work except
+      it will not take effect until the program is exited and restarted.
+      This conversion is automatic but will probably be removed in the
+      future.
+    * WARNING: Some changes are not backwards compatible with previous
+      versions.
+        1. The "Link to Next" hotkey in the playlist editor has been
+           changed from ^l to ^n.  This is so ^l can be used in the
+           future to lock entries.  I have postponed adding the lock
+           feature until everyone gets the message of this change.
+        2. If you set ratings in the playlist editor, the rating will
+           now be locked.  I think that's what most people would want
+           anyway.  I may add a button or something to make this
+           optional if enough people want it.
+
+Ver. 0.10.01 - 2008-08-21
+    * Added "PauseAfter" function.  Couldn't think of a good way to
+      work it into the GUI, so it only works by pressing "C".  The
+      "Pause" button will have a border and the player will pause
+      after the current entry finishes.  You can resume it by pressing
+      the Pause button, pressing "c" or "C".
+    * NOTE to Ver. 0.10.00 - If you add files while in the "Oldest"
+      mode, the new entries will not play until either you exit and
+      re-enter omp OR simply type an "o" which will re-sort the oldest
+      list.
+
+Ver. 0.10.00 - 2008-08-15
+    * Added configuration editor.  I want to keep the program small so
+      there is no help in the program.  Most of the options are
+      self-explanatory.  Player programs must either be in your
+      executable path or the full path must be given.  Note that an
+      entry is "selected" using a certain method but may or may not
+      "play" based on other criteria.  A letter in parentheses is a
+      hotkey that can automatically change the setting of that option.
+      WARNINGS:
+        Very little error checking is done, so setting certain options
+          to invalid values will likely crash the program or cause other
+          unexpected behavior.
+        If a configuration is saved, the omprc file will be overwritten
+          without the comments.  We suggest you keep a copy of the
+          original omprc file for reference or in the event it can no
+          longer be parsed for some reason.
+
+      Format is: option description | default value | notes
+        ogg Player | ogg123 |
+        ogg Options ||
+        mp3 Player | mpg123 |
+        mp3 Options | -v -C --aggressive |
+        mod Player | xxmp |
+        mod Options ||
+        Save Interval | 10 | After this number of played songs, the play
+          list will be written to disk.  If set to 0, then the play list
+          will never be automatically saved.
+        Lists To Play | A | An entry will only be selected if it belongs
+          to at least one of the lists given in this option.  Putting in
+          a	non-existent list (including nothing) will may cause the
+          program to crash.
+        Check Rating (%) | true | If true, then when an entry is
+          selected, a random number from 1 to 100 is generated.  If this
+          number is greater than the entry's rating, then the entry will
+          not play.  A queued song will always play.  Note that an entry
+          with a rating of 0 can only be played if it is queued
+          regardless of this setting.
+        Force New | true | No effect if Check Rating is false.  If Check
+          Rating is true, then the rating is ignored if the entry has
+          never played.  This allows newly added entries that have the
+          default rating of 50% to play without checking the rating.
+          Once an entry has played at least once, this setting has no
+          effect.
+        Update Rating | true | If true and the rating is not locked,
+          then if the entry plays to completion its rating will be
+          increased and if it is skipped then its rating will be
+          decreased.  If false, the	rating will not change on either
+          of these events.
+        Check Repeat (@) | true | See Minimum Age
+        Minimum Age | 4h | Minimum amount of time that must elapse
+          before an entry is played again.  This is ignored by queued
+          songs and only used if Check Repeat is true.
+        Selection Method (r)(o) | R | R = Random, S = Sequential,
+          O = Oldest.  Whichever method is used, the entry still may
+          or may not play depending on options given above.  "R" and
+          "S" should be self-explanatory.  "O" will select the entry
+          which has not been *selected* (whether played or not) for the
+          longest period of time.  Note that the hotkey "r" will toggle
+          between Random and Sequential.  The hotkey "o" is used to
+          select oldest.  Be aware that selecting the Oldest method
+          will cause a one-time delay as the entries are sorted by the
+          date.  This will also increase the memory used by	the program.
+    * Removed debugging printouts.  What is printed now is either stuff
+      I want to see or is output by the players.
+    * Playlist editor now displays currently playing song when first
+      called up.  A "." will center the editor on the currently playing
+      song as well.
+
+Ver. 0.09.04 - 2008-08-14
+    * Added new hotkeys:
+        a = Stop after
+        l = Lock
+        r = toggle for Random/Sequential
+        % = Rating
+        @ = Repeat check
+        m = menu
+        p = Playlist editor
+        S = Select playlist to play (note uppercase)
+        t = Stop at time
+    * Added hotkey indicator to tooltips
+    * Added button feedback when hotkeys are pressed.
+
+Ver. 0.09.03 - 2008-08-07
+    * Ctrl-Escape will exit omp.  [This doesn't work with some
+      window managers, so ^w was added in 0.15.00.]
+    * Added search option in playlist editor.  Press "/" and enter a
+      string to search for.  If the first letter of the string is a "!"
+      then the search will be case insensitive.  No regex or anything
+      else fancy at this time despite the prompt saying "pattern". :)
+      The first entry with that string will be shown.  Pressing "n"
+      will find the next matching entry.  For some reason Tk isn't
+      doing what I expect and the "active" entry isn't underlined like
+      it should be.  So, for now, look at the xterm output to see the
+      specific line which is highlighted.  I could "select" the entry
+      to highlight it, but I wanted to use the search option to build
+      up a select list.  [Fixed in 0.12.00.  I had to modify OCaml's Tk
+      interface in order to get it to work. :(  ]
+    * Added shortcut keys for playlist editor popup menu options.
+      "F2" or the "Menu" key will bring up the popup menu.  Shortcut
+      keys are shown in ().  "Escape" will exit the playlist editor.
+    * Fixed "Unrecognized file type" for .flac files.  Ahem, when I
+      added the flac option I forgot to change the method the program
+      used to get the file extension.  The last 3 characters weren't
+      ever going to equal "flac".  *blush*  Oh, well, I also saw that
+      it always expected lower case extensions as well so that is fixed
+      also.
+    * Check to see if rating was changed in playlist editor while the
+      entry was playing and not update it after entry is played or
+      skipped.
+    * Changed to not update rating of the currently playing entry if the
+      program is exited.
+
+Ver. 0.09.02 - 2008-06-05
+    * Changed to not count entries "Not in list" as a skip for forced
+      play purposes.  IOW, previously, if 10 entries came up "Not in
+      list" the next entry that was in list was a force play regardless
+      of rating or time.
+
+Ver. 0.09.01 - 2008-05-31
+    * Clear the '=nnn' from playlist entries before running dupe check.
+    * Change "Exit" to "Close" on the playlist editor.
+    * Add Window title to Playlist.
+    * Put directory chooser under playlist window instead of main
+      window.
+    * Allow large step for ratings that have been changed or locked.
+      Actually, this works for all entries.  PageUp will increase the
+      rating by 5 more than the normal increase amount and PageDown will
+      decrease it by 5 more than the normal decrease amount.
+
+Ver. 0.09.00 - 2008-04-03
+    * Changed to use tk_chooseDirectory in the playlist editor.
+    * WARNING: This requires a modified OCaml labltk build in order
+      to compile.
+
+Ver. 0.08.00 - 2008-03-31
+    * Implemented the "Set Rating" popup menu option in the playlist
+      editor.
+
+Ver. 0.07.00 - 2008-03-22
+    * Added menu and button tooltips.
+    * Added "Stop after queue" to the menu.
+    * Added "Stop after time" to the menu.
+
+Ver. 0.06.01 - 2008-03-08
+    * Update playlist count when new files are added.
+
+Ver. 0.06.00 - 2008-03-07
+    * Added ability to play .mod files.  Tested only with xxmp (Debian
+      package xmp-x11).
+
+Ver. 0.05.04 - 2008-02-23
+    * Added reading of .omp/omprc file to set some of the program
+      options.
+    * Fixed bug where an entry with a rating of 0 could play in certain
+      situations.
+    * Fixed "Stop" button.
+
+Ver. 0.05.03 - 2008-02-09
+    * Changed so that when rating up/down buttons are pressed, the
+      rating is immediately changed so the rating can be locked
+      immediately if desired.  This will also save the changed rating
+      if the program is exited or the song skipped.
+
+Ver. 0.05.02 - 2008-02-09
+    * Added ability to link 2 or more sequential entries together so
+      that if the first one plays, the second will follow it.
+      Caveat: the linked entries may also come up in the random
+      selection, so their ratings will increase faster.
+      Workarounds: 1. If you only want the latter entries to play if the
+      first entry plays, you can move the latter entries to another
+      sublist.  2. If you want them to play alone as well, you can lock
+      their rating.
+      This feature is implemented by adding the first entry to the "n"
+      sublist.  [This has been moved to a "flags" field.]
+      2nd caveat: Newly added entries are always appended to the end of
+      the playlist until the program is exited.  When exiting, the
+      playlist is always sorted.  Therefore, it is best to wait until
+      after exiting and restarting the program to link entries together.
+
+Ver. 0.05.01 - 2008-02-09
+    * Added ability to change volume with "+" and "-" but only works
+      with amixer.  If you see the "Vol: nn%" in the top line, volume
+      control should work.
+
+Ver. 0.05.00 - 2008-02-09
+    * Added "Lock" button to lock an entry to the current rating.
+    * Added "Save" button to save the playlist.
+
+Ver. 0.04.01 - 2008-01-20
+    * Added single character commands to allow program control from
+      WM's like KDE without having to select the program itself.
+      "z" = previous, "x" = play, "c" = pause, "v" = stop,
+      "n" = skipdown, "b" = next, (note the previous 2 are in a
+      different order on the keyboard than they are in the button
+      list), "s" = save playlist
+      Debugging/Info: "q" will dump play queue [Changed to "Q"], "h"
+      dumps history.  Note that due to threading, the ouput from these
+      may be delayed.  Also, your xterm may be messed up when the
+      program exits and you'll need to enter "reset" to fix it (or
+      "exit" and open another one).
+
+Ver. 0.04.00 - 2008-01-20
+    * Added ability to queue entries from the playlist editor.
+    * Added "Previous" capability.  One push will restart current song.
+      A second push will play the previously played song.
+
+Ver. 0.03.00 - 2007-11-24
+    * Added "Add Dir" and "Dupes" functionality to the playlist editor.
+      Unfortunately, the Tk directory widget doesn't appear to be
+      implemented in OCaml and I don't feel like writing one, so you
+      can't browse yet.  You have to enter the path name manually.
+      [I'm now using a customized labltk with the directory widget
+      working.]  Using "/" for the path name will search your entire
+      directory tree for sound files.  Dupes will check for duplicate
+      entries based on MD5 encoding.  Note that on a large playlist,
+      this can take many minutes (hours?) to run.  [It turns out that
+      unless you have a very old computer, this will probably run
+      in a few seconds.]
+
+Ver. 0.02.00 - 2007-11-17
+    * Added support for multiple sublists.  At present, sublists can
+      only be named with a single letter.  Not very flexible, but allows
+      one to put entries into various sublists and play only songs
+      in a given sublist.  Note that lower case sublists are reserved.
+      Specifically "x" is trash, so if you copy/move an entry to that
+      list, it will be deleted from the playlist.
+      Caveat: Entries that are in the global list "A" as well as a
+      sublist or in multiple sublists will increase in ratings faster
+      since they can be selected when any of their lists are being
+      played.  I have several ideas in mind on how to work around this
+      but haven't decided on which one yet.
+
+Ver. 0.01.02 - 2007-10-30
+    * Added graphical buttons.
+
+Ver. 0.01.00 - 2007-10-20
+    * Ugly gui but with basic functionality.  Generally options can't
+    * be changed except by changing the source and recompiling the
+    * program.

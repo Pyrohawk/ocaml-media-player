@@ -1,0 +1,27 @@
+omp is Copyright (C) 2007-2014 Charles E. Hawkins
+
+omp has only been tested on Linux--Arch and Ubuntu.
+
+omp is a graphical utility to play ogg, mp3, flac, mp4, flv, mov, m4a,
+avi, and mod files according to a rating system designed to keep track
+of user listening habits.  The idea was inspired by vux.  I also wanted
+a player that uses little memory so program features have been kept to
+a minimum.
+
+omp requires OTk to build and vlc to run.  Arch users can find OTk
+in the AUR package ocaml-otk.  Others can find it at:
+forge.ocamlcore.org/projects/otk
+vlc should be readily available as a package on any distribution.
+
+
+A few of the changes from vux:
+  1. Added GUI.  omp was designed to run using both an xterm and a GUI.
+  2. Rating is simply a percentage chance of playing.
+  3. Added ability to modify playlist and configuration while program is
+     running.
+  4. Added ability to play many other file types.
+  5. Added ability to manually queue files for playing.
+
+See INSTALL for instructions on how to build and install omp.
+
+Please read the "Credits" section of the user manual.

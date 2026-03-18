@@ -1,0 +1,41 @@
+INSTALL
+
+omp has only been tested on Linux, specifically Arch and Ubuntu.
+
+NOTE: After installing the first time, you MUST run ompinit in
+each user's home directory that want's to use omp.  This only
+needs to be done once.
+
+From Source:
+
+  You need OCaml and the OTk library installed.  Arch users can use
+  the AUR 'ocaml-otk' package.  Others can get it at
+http://forge.ocamlcore.org/projects/otk
+
+  ./configure
+  make
+  sudo make install
+
+  Default installation tree is /usr/local which may be changed with
+  a --prefix option to configure.
+  Files are installed in PREFIX/bin, PREFIX/share/omp, and
+  PREFIX/share/doc/omp, any or all of which may be changed.
+  See "./configure -h" for available options.
+
+  Read the message after ./install carefully.
+
+From Binary Package:
+  ./configure
+  sudo make ./install
+
+Upgrade Binary:
+  Most upgrades are changes in the "omp" executable.  Backup your
+  existing executable and copy the new one to the same place.  It
+  is always a good idea to make a copy of your scorelist just in
+  case some bug slipped in the new version.
+
+Upgrade from Source:
+  Build the upgrade from source as above and do the same as
+  Upgrade Binary.
+  
+Read The Fine Manual!
