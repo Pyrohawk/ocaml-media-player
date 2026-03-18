@@ -1,18 +1,63 @@
-omp is Copyright (C) 2007-2014 Charles E. Hawkins
+# omp - OCaml Multimedia Player
 
-omp has only been tested on Linux--Arch and Ubuntu.
+**omp** is a graphical utility designed to play audio and video files (ogg, mp3, flac, mp4, flv, mov, m4a, avi, and mod) according to a rating system designed to keep track of user listening habits. 
 
-omp is a graphical utility to play ogg, mp3, flac, mp4, flv, mov, m4a,
-avi, and mod files according to a rating system designed to keep track
-of user listening habits.  The idea was inspired by vux.  I also wanted
-a player that uses little memory so program features have been kept to
-a minimum.
+The idea was originally inspired by `vux`. It is designed to use very little memory, keeping program features to a necessary minimum while providing a graphical remote control for VLC media player.
 
-omp requires OTk to build and vlc to run.  Arch users can find OTk
-in the AUR package ocaml-otk.  Others can find it at:
-forge.ocamlcore.org/projects/otk
-vlc should be readily available as a package on any distribution.
+### 📜 Credits & History
+* **Original Author:** Charles E. Hawkins (Copyright © 2007-2014)
+* **Original Project Site:** [https://forge.ocamlcore.org/projects/omp/](https://forge.ocamlcore.org/projects/omp/)
 
+**Modernization Update:** The original `omp` relied on the older `OTk` (Themed Tk) library, which no longer compiles easily on modern operating systems (like macOS Apple Silicon or modern Linux distributions). This repository has been updated to use the standard `LablTk` library, bringing the software back to life for modern machines while preserving the original program logic.
+
+---
+
+## 🛠 Prerequisites
+
+To compile and run `omp` today, you will need:
+1. **OCaml** and the **LablTk** library installed.
+2. **VLC Media Player**: `omp` is a frontend controller and requires `vlc` to be installed and available in your system's PATH.
+   * *Ubuntu/Debian:* `sudo apt install vlc`
+   * *macOS:* `brew install vlc`
+
+## 🚀 Build and First-Time Setup
+
+`omp` requires a specific directory structure in your home folder to launch successfully. Follow these steps carefully to build and set up the player.
+
+**1. Compile the program**
+Navigate to the source code folder and run:
+```bash
+make
+
+(This will generate an executable, likely located at ./x86_64/omp or ./omp depending on your architecture).
+
+**2. Create the hidden configuration directory
+omp looks for a .omp folder in your home directory on startup.
+
+Bash
+mkdir -p ~/.omp
+
+**3. Set up the image assets
+The graphical interface relies on .gif files for its buttons. You must copy the images folder from this source code repository into your new .omp directory:
+
+Bash
+cp -r images ~/.omp/
+
+**4. Create an initial playlist
+The program will crash or refuse to open if it does not find a default scorelist file. You can create a simple text file with one valid media path to get it started:
+
+Bash
+echo "/path/to/any/valid/audio_or_video_file.mp3" > ~/.omp/scorelist
+(Note for Mac users: You can use /System/Library/Sounds/Glass.aiff as a quick test file!)
+
+## ▶️ Running the Player
+Once the setup is complete, you can launch the program from your terminal:
+
+Bash
+./x86_64/omp
+(Adjust the path if your executable compiled to the root folder).
+
+## 💡 Original Developer Notes (Changes from vux)
 
 A few of the changes from vux:
   1. Added GUI.  omp was designed to run using both an xterm and a GUI.
@@ -21,7 +66,5 @@ A few of the changes from vux:
      running.
   4. Added ability to play many other file types.
   5. Added ability to manually queue files for playing.
-
-See INSTALL for instructions on how to build and install omp.
 
 Please read the "Credits" section of the user manual.
